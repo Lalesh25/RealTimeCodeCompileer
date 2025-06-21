@@ -8,7 +8,7 @@ const app = express();
 
 const server = http.createServer(app);
 
-const url = `https://realtimecodecompileer-1.onrender.com/`;
+const url = `https://realtimecodecompileer.onrender.com`;
 const interval = 30000;
 
 function reloadWebsite() {
