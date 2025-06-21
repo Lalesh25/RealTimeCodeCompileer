@@ -3,7 +3,9 @@ import './App.css';
 import io from 'socket.io-client';
 import Editor from '@monaco-editor/react';
 import { useEffect } from 'react';
-const socket = io("http://localhost:5000")
+import {v4 as uuid} from 'uuid';
+
+const socket = io("https://realtimecodecompileer-1.onrender.com/")
 
 const App = () => {
   const [joined,setJoined] = useState(false);
@@ -94,8 +96,16 @@ const handleLanguageChange = e => {
   socket.emit("languageChange",{roomId,language:newLanguage});
 }
 
+const [userInput,setUserInput] = useState("");
+
+
 const runCode = () =>{
-  socket.emit("compileCode",{code,roomId,language,version});
+  socket.emit("compileCode",{code,roomId,language,version,input:userInput});
+}
+
+const createRoomId = () =>{
+  const roomId = uuid();
+  setRoomId(roomId);
 }
 
   if(!joined){
@@ -103,6 +113,7 @@ const runCode = () =>{
     <div className="join-form">
       <h1>Join Code Room</h1>
       <input type="text" placeholder='Room Id' value={roomId} onChange={(e)=>setRoomId(e.target.value)} />
+      <button onClick={createRoomId}>Create Id</button>
       <input type="text" placeholder='Your Name' value={userName} onChange={(e)=>setUserName(e.target.value)} />
       <button onClick={joinRoom}>Join Room</button>
     </div>
@@ -147,6 +158,9 @@ const runCode = () =>{
         }
       }
       />
+
+      <textarea className='input-console' value={userInput} onChange={e=>setUserInput(e.target.value)} placeholder='Enter Input Here.'/>
+
       <button className='run-btn' onClick={runCode}>Execute</button>
       <textarea className='output-console' 
       value={outPut} 
