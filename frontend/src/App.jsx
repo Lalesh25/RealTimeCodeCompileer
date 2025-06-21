@@ -5,7 +5,7 @@ import Editor from '@monaco-editor/react';
 import { useEffect } from 'react';
 import {v4 as uuid} from 'uuid';
 
-const socket = io("https://realtimecodecompileer-1.onrender.com/")
+const socket = io("https://realtimecodecompileer.onrender.com")
 
 const App = () => {
   const [joined,setJoined] = useState(false);
