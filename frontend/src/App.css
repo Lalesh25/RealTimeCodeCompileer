@@ -150,3 +150,17 @@ body{
     background-color: #fff;
   }
 }
+
+.run-btn{
+  background-color: rgb(157, 240, 34);
+  padding: 10px;
+
+}
+
+.output-console{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+  height: 200px;
+}
